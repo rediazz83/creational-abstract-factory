@@ -2,59 +2,39 @@ package com.patterns.abstractfactory;
 
 import com.patterns.abstractfactory.domain.Automovil;
 import com.patterns.abstractfactory.domain.Scooter;
-import com.patterns.abstractfactory.factory.FabricaVehiculo;
-import com.patterns.abstractfactory.factory.FabricaVehiculoElectricidad;
-import com.patterns.abstractfactory.factory.FabricaVehiculoGasolina;
+import com.patterns.abstractfactory.emuns.TipoFabricaEnum;
+import com.patterns.abstractfactory.service.VehiculoService;
+import com.patterns.abstractfactory.service.impl.VehiculoServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
 public class AbstractfactoryApplication implements CommandLineRunner {
 
-	private FabricaVehiculo fabrica;
+    private VehiculoService service = new VehiculoServiceImpl();
 
 	public static void main(String[] args) {
 		SpringApplication.run(AbstractfactoryApplication.class, args);
 	}
 
 	@Override
-	public void run(String... args) {
-		System.out.println("Hello world!");
+	public void run(String... args) throws Exception {
+        TipoFabricaEnum tipoFabrica = consultarIntencion();
+        List<Automovil> autos = service.crearAutomoviles(tipoFabrica);
+        autos.stream().forEach(automovil -> automovil.mostrarCaracteristicas());
 
-		switch(consultarIntencion()) {
-            case "1":
-                fabrica = new FabricaVehiculoElectricidad();
-                break;
-            case "2":
-                fabrica = new FabricaVehiculoGasolina();
-                break;
-        }
-
-        Automovil[] autos = new Automovil[3];
-        for(int index = 0; index < autos.length; index++) {
-            autos[index] = fabrica.creaAutomovil("estandar", "amarillo", 6+index, 3.2);
-        }
-
-        for (Automovil auto: autos) {
-            System.out.println(auto.toString());
-        }
-
-        Scooter[] scooters = new Scooter[2];
-        for(int index = 0; index < scooters.length; index++) {
-            scooters[index] = fabrica.creaScooter("clasico", "rojo", 2+index);
-        }
-
-        for (Scooter scooter: scooters) {
-            System.out.println(scooter.toString());
-        }
+        List<Scooter> scooters = service.crearScooters(tipoFabrica);
+        scooters.stream().forEach(scooter -> scooter.mostrarCaracteristicas());
 	}
 
-	private String consultarIntencion() {
+	private TipoFabricaEnum consultarIntencion() throws Exception {
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Desea crear vehiculos electricos (1) o a gasolina (2) ?");
-		return reader.next();
+
+		return TipoFabricaEnum.buscarTipoVehiculo(Integer.parseInt(reader.next()));
 	}
 }

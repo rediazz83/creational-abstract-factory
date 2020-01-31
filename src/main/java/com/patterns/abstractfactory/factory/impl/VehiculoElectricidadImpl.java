@@ -1,11 +1,12 @@
-package com.patterns.abstractfactory.factory;
+package com.patterns.abstractfactory.factory.impl;
 
 import com.patterns.abstractfactory.domain.Automovil;
 import com.patterns.abstractfactory.domain.AutomovilElectricidad;
 import com.patterns.abstractfactory.domain.Scooter;
 import com.patterns.abstractfactory.domain.ScooterElectricidad;
+import com.patterns.abstractfactory.factory.AbstractFactory;
 
-public class FabricaVehiculoElectricidad implements FabricaVehiculo {
+public class VehiculoElectricidadImpl implements AbstractFactory {
 
     @Override
     public Automovil creaAutomovil(String modelo, String color, int potencia, double espacio) {
