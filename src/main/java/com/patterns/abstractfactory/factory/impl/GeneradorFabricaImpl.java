@@ -3,7 +3,9 @@ package com.patterns.abstractfactory.factory.impl;
 import com.patterns.abstractfactory.emuns.TipoFabricaEnum;
 import com.patterns.abstractfactory.factory.AbstractFactory;
 import com.patterns.abstractfactory.factory.GeneradorFabrica;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GeneradorFabricaImpl implements GeneradorFabrica {
 
     private static final int VEHICULO_ELECTRICO = 1;

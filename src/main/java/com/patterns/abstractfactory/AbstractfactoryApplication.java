@@ -5,6 +5,7 @@ import com.patterns.abstractfactory.domain.Scooter;
 import com.patterns.abstractfactory.emuns.TipoFabricaEnum;
 import com.patterns.abstractfactory.service.VehiculoService;
 import com.patterns.abstractfactory.service.impl.VehiculoServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +16,8 @@ import java.util.Scanner;
 @SpringBootApplication
 public class AbstractfactoryApplication implements CommandLineRunner {
 
-    private VehiculoService service = new VehiculoServiceImpl();
+    @Autowired
+    private VehiculoService service;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AbstractfactoryApplication.class, args);

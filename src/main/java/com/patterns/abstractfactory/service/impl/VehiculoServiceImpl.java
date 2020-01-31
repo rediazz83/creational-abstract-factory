@@ -5,15 +5,19 @@ import com.patterns.abstractfactory.domain.Scooter;
 import com.patterns.abstractfactory.emuns.TipoFabricaEnum;
 import com.patterns.abstractfactory.factory.AbstractFactory;
 import com.patterns.abstractfactory.factory.GeneradorFabrica;
-import com.patterns.abstractfactory.factory.impl.GeneradorFabricaImpl;
 import com.patterns.abstractfactory.service.VehiculoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class VehiculoServiceImpl implements VehiculoService {
 
-    private GeneradorFabrica generador = new GeneradorFabricaImpl();
+    @Autowired
+    private GeneradorFabrica generador;
+
     private AbstractFactory fabrica;
 
     public List<Automovil> crearAutomoviles(TipoFabricaEnum tipoFabrica) throws ClassNotFoundException {
