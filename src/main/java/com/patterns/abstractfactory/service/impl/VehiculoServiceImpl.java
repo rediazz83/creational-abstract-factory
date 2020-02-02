@@ -15,25 +15,21 @@ import java.util.List;
 @Component
 public class VehiculoServiceImpl implements VehiculoService {
 
-    @Autowired
-    private GeneradorFabrica generador;
+    public static final int CANTIDAD_AUTOS = 3;
+    public static final int CANTIDAD_SCOOTERS = 2;
 
-    private AbstractFactory fabrica;
-
-    public List<Automovil> crearAutomoviles(TipoFabricaEnum tipoFabrica) throws ClassNotFoundException {
-        fabrica = generador.generarFabrica(tipoFabrica);
+    public List<Automovil> crearAutomoviles(AbstractFactory fabrica) {
         List<Automovil> autos = new ArrayList<>();
-        for(int index = 0; index < 3; index++) {
+        for(int index = 0; index < CANTIDAD_AUTOS; index++) {
             autos.add(fabrica.creaAutomovil("estandar", "amarillo", 6+index, 3.2));
         }
 
         return autos;
     }
 
-    public List<Scooter> crearScooters(TipoFabricaEnum tipoFabrica) throws ClassNotFoundException {
-        fabrica = generador.generarFabrica(tipoFabrica);
+    public List<Scooter> crearScooters(AbstractFactory fabrica) {
         List<Scooter> scooters = new ArrayList<>();
-        for(int index = 0; index < 2; index++) {
+        for(int index = 0; index < CANTIDAD_SCOOTERS; index++) {
             scooters.add(fabrica.creaScooter("clasico", "rojo", 2+index));
         }
 
