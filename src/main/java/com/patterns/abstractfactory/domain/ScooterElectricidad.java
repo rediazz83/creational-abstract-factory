@@ -1,9 +1,11 @@
 package com.patterns.abstractfactory.domain;
 
+import com.patterns.abstractfactory.emuns.TipoVehiculoEnum;
+
 public class ScooterElectricidad extends Scooter {
 
-    public ScooterElectricidad(String modelo, String color, int potencia) {
-        super(modelo, color, potencia);
+    public ScooterElectricidad(String modelo, String color, int potencia, TipoVehiculoEnum tipoVehiculo) {
+        super(modelo, color, potencia, tipoVehiculo);
     }
 
     @Override
@@ -15,6 +17,7 @@ public class ScooterElectricidad extends Scooter {
     public String toString() {
         return "ScooterElectricidad{" +
                 "modelo='" + modelo + '\'' +
+                ", tipoVehiculo='" + tipoVehiculo.getValor() + '\'' +
                 ", color='" + color + '\'' +
                 ", potencia=" + potencia +
                 '}';
